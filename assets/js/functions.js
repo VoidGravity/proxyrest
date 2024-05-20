@@ -1,4 +1,3 @@
-
 function capitalise(string) {
   return string[0].toUpperCase() + string.substring(1, string.length);
 }
@@ -184,50 +183,55 @@ function setEventListners() {
 }
 
 async function spelCheckstring(string) {
-    const tags = string;
-    let value = string;
-    if (value) {
-      value = value.trim();
-    }
-    let response = await fetch(`https://clients1.google.com/complete/search?q=${value}&nolabels=t&client=youtube&ds=yt&dataType=jsonb`);
-    response = await response.text();
-    const parsedResponse = await parseJSONP(response);
-    if (parsedResponse.suggestions.length) {
-      value = parsedResponse.suggestions[0].phrase;
-      // bug to fix : 
-    // input :  bigest piza
-    //   output:  biggest piz
-    //   {phrase: 'biggest pizza in the world', index: 0, details: Array(2)}
-    // todo : ony trim unecessary words
-      if (value.length > string.length) {
-        value = value.substring(0, string.length);
-      }
-      console.log("input : ",string);
-      console.log("output: ",value);
-      console.log("suggestions",parsedResponse.suggestions);
-      console.log("suggestion 0",parsedResponse.suggestions[0]);
-      return value;
-    } else {
-        return string;
-    }
-  
-    function parseJSONP(jsonpResponse) {
-      const jsonStart = jsonpResponse.indexOf("(") + 1;
-      const jsonEnd = jsonpResponse.lastIndexOf(")");
-      const jsonString = jsonpResponse.substring(jsonStart, jsonEnd);
-      const jsonData = JSON.parse(jsonString);
-      const result = {
-        query: jsonData[0],
-        suggestions: jsonData[1].map((item) => ({
-          phrase: item[0],
-          index: item[1],
-          details: item[2],
-        })),
-        metadata: jsonData[2],
-      };
-      return result;
-    }
+  const tags = string;
+  let value = string;
+  if (value) {
+    value = value.trim();
   }
+  let response = await fetch(`https://clients1.google.com/complete/search?q=${value}&nolabels=t&client=youtube&ds=yt&dataType=jsonb`);
+
+  response = await response.text();
+  const parsedResponse = await parseJSONP(response);
+  if (parsedResponse.suggestions.length) {
+    value = parsedResponse.suggestions[0].phrase;
+    
+    function adjustString(value, input) {
+      let valueWords = value.trim().split(/\s+/);
+      let inputWords = input.trim().split(/\s+/);
+
+      if (valueWords.length > inputWords.length) {
+        valueWords = valueWords.slice(0, inputWords.length);
+      }
+      return valueWords.join(" ");
+    }
+    value = adjustString(value, string);
+
+    console.log("input : ", string);
+    console.log("output: ", value);
+    console.log("suggestions", parsedResponse.suggestions);
+    console.log("suggestion 0", parsedResponse.suggestions[0]);
+    return value;
+  } else {
+    return string;
+  }
+
+  function parseJSONP(jsonpResponse) {
+    const jsonStart = jsonpResponse.indexOf("(") + 1;
+    const jsonEnd = jsonpResponse.lastIndexOf(")");
+    const jsonString = jsonpResponse.substring(jsonStart, jsonEnd);
+    const jsonData = JSON.parse(jsonString);
+    const result = {
+      query: jsonData[0],
+      suggestions: jsonData[1].map((item) => ({
+        phrase: item[0],
+        index: item[1],
+        details: item[2],
+      })),
+      metadata: jsonData[2],
+    };
+    return result;
+  }
+}
 
 function setCategory(category, day, repeterIndex) {
   category = category.value;
