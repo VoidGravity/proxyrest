@@ -108,7 +108,7 @@ $(document).ready(function () {
         onSelect: function (selectedDate) {
             let minDate = getDate(this);
             let maxDate = new Date(minDate.getTime());
-            maxDate.setDate(maxDate.getDate() + 5);
+            maxDate.setDate(maxDate.getDate() + 3);
             $("#date_to").datepicker("option", "minDate", minDate);
             $("#date_to").datepicker("option", "maxDate", maxDate);
             setDate($("#date_from")[0].value,'from')
@@ -122,7 +122,7 @@ $(document).ready(function () {
         onSelect: function (selectedDate) {
             let maxDate = getDate(this);
             let minDate = new Date(maxDate.getTime());
-            minDate.setDate(minDate.getDate() - 5);
+            minDate.setDate(minDate.getDate() - 3);
             $("#date_from").datepicker("option", "maxDate", maxDate);
             $("#date_from").datepicker("option", "minDate", minDate);
             setDate($("#date_to")[0].value,'to')
