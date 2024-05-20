@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProxyRest</title>
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/jquery-ui.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/break-points.css">
+</head>
+
+<body class="body" style="background-image: url('./assets/img/bg.jpg');">
+    <div class="container">
+        <div class="row justify-content-center py-5">
+            <div class="col-auto">
+                <img src="./assets/img/logo.svg" class="w-100 img img-thumbnail py-2 px-3 border-0 shadow" alt="proxyrest logo">
+            </div>
+        </div>
+    </div>
+    <div class="container rounded shadow-lg bg-white p-3">
+        <div class="row justify-content-center py-3">
+            <div class="col-auto">
+                <h1 class="h3">Proxirest Generateur de menu</h1>
+            </div>
+        </div>
+        <!-- <form id="form" autocomplete="off"> -->
+            <div class="row mb-5 text-center">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="school" class="form-label">École <span class="text-danger">*</span></label>
+                        <input tabindex="-1" type="text" id="school" class="form-control form-select">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <label class="form-label">Sélectionner la date  <span class="text-danger">*</span></label>
+                        <div class="form-group col-6">
+                            <input tabindex="-1" type="text" id="date_from" class="form-control bg-white" placeholder="Du" readonly>
+                        </div>
+                        <div class="form-group col-6">
+                            <input tabindex="-1" type="text" id="date_to" class="form-control bg-white" placeholder="Au" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3 d-flex justify-content-center days">
+                <!-- days -->
+            </div>
+            <div class="row py-3 justify-content-center">
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-success" onclick="generatePdf()">Générer le pdf</button>
+                </div>
+            </div>
+        <!-- </form> -->
+    </div>
+    <script src="./assets/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/js/jquery-3.7.1.js"></script>
+    <script src="./assets/js/jquery-ui.js"></script>
+    <script src="./assets/js/functions.js"></script>
+    <script src="./assets/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@google-ai/generativelanguage@0.5.0/dist/umd/index.min.js"></script>
+    <script type="importmap">
+        { "imports": { "@google/generative-ai": "https://esm.run/@google/generative-ai" } }
+    </script>
+    <script src="./assets/js/Ai-AutoCorrect.js"></script>
+    <script src="dist/bundle.js"></script>
+</body>
+
+</html>
