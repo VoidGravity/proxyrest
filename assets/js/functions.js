@@ -197,11 +197,18 @@ async function spelCheckstring(string) {
     const parsedResponse = await parseJSONP(response);
     if (parsedResponse.suggestions.length) {
       value = parsedResponse.suggestions[0].phrase;
+      // bug to fix : 
+    // input :  bigest piza
+    //   output:  biggest piz
+    //   {phrase: 'biggest pizza in the world', index: 0, details: Array(2)}
+    // todo : ony trim unecessary words
       if (value.length > string.length) {
         value = value.substring(0, string.length);
       }
-      console.log("input",string);
-      console.log("output",value);
+      console.log("input : ",string);
+      console.log("output: ",value);
+      console.log("suggestions",parsedResponse.suggestions);
+      console.log("suggestion 0",parsedResponse.suggestions[0]);
       return value;
     } else {
         return string;
