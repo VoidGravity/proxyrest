@@ -1,6 +1,3 @@
-// var { GoogleGenerativeAI } = require("@google/generative-ai");
-// var { GoogleGenerativeAI } = import("@google/generative-ai");
-// import { GoogleGenerativeAI } from "@google/generative-ai";
 
 function capitalise(string) {
   return string[0].toUpperCase() + string.substring(1, string.length);
